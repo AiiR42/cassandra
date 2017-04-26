@@ -1,4 +1,28 @@
 # file: cassandra/tasks/main.yml
 
-- include: package.yml
-  when: cassandra_install_method == "package"
+- name: Downloading cassandra
+  become: yes
+  become_user: root
+  get_url:
+    url: '{{cassandra_tgz_url}}'
+    dest: /tmp/{{cassandra_tgz}}
+    mode: '0644'
+    timeout: '{{cassandra_download_timeout_seconds}}'
+    checksum: '{{cassandra_checksum}}'
+
+- name: Unarchiving
+  become: yes
+  become_user: root
+  unarchive:
+    copy: no
+    src: /tmp/{{cassandra_tgz}}
+    dest: '{{cassandra_install_parent_dir}}'
+    creates: '{{cassandra_install_parent_dir}}/{{cassandra_name}}'
+    
+- name: Linking
+  become: yes
+  become_user: root
+  file:
+    src: '{{cassandra_install_parent_dir}}/{{cassandra_name}}'
+    dest: '{{cassandra_install_parent_dir}}/cassandra'
+    state: link

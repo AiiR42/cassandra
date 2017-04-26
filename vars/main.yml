@@ -1,0 +1,3 @@
+cassandra_name : 'apache-cassandra-{{cassandra_version}}'
+cassandra_tgz : '{{cassandra_name}}-bin.tar.gz'
+cassandra_tgz_url : '{{cassandra_mirror}}/{{cassandra_version}}/{{cassandra_tgz}}'
