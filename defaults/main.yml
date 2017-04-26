@@ -3,6 +3,11 @@
 cassandra_install_method: "package"
 cassandra_version: "3.10"
 
+cassandra_mirror : http://www-us.apache.org/dist/cassandra
+cassandra_checksum: sha256:c09c3f92d4f80d5639e3f1624c9eec45d25793bbb6b3e3640937b68a9c6d107f
+cassandra_install_parent_dir : /usr/local
+cassandra_download_timeout_seconds: 600
+
 cassandra_user: "cassandra"
 cassandra_group: "cassandra"
 cassandra_uid: 3455
